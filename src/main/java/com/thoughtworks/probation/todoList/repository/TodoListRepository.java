@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface TodoListRepository extends CrudRepository<Event, Integer> {
     List<Event> findAll();
+    Event findTopByOrderByIdDesc();
 }

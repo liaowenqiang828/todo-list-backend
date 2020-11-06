@@ -20,4 +20,13 @@ public class TodoListService {
     public List<Event> getTodoList() {
         return this.todoListRepository.findAll();
     }
+
+    public int addEventToList(Event event) {
+        int preId = this.todoListRepository.findTopByOrderByIdDesc().getId();
+        int curId = preId + 1;
+        event.setId(curId);
+
+        this.todoListRepository.save(event);
+        return curId;
+    }
 }
