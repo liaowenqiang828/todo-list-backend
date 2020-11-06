@@ -23,4 +23,9 @@ public class TodoListController {
     public int addEventToList(@RequestBody Event event) {
         return this.todoListService.addEventToList(event);
     }
+
+    @DeleteMapping("/event/{id}")
+    public void deleteEventById(@PathVariable int id) {
+        this.todoListService.deleteEventById(id);
+    }
 }

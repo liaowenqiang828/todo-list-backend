@@ -29,4 +29,8 @@ public class TodoListService {
         this.todoListRepository.save(event);
         return curId;
     }
+
+    public void deleteEventById(int id) {
+        this.todoListRepository.deleteById(id);
+    }
 }
