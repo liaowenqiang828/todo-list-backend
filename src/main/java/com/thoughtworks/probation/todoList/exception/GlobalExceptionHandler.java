@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @ControllerAdvice
 public class GlobalExceptionHandler {
     @ExceptionHandler(IdNotMatchedException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<ErrorResult> handler(IdNotMatchedException exception) {
         String message = exception.getMessage();
         ErrorResult errorResult = new ErrorResult(message);
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResult);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResult);
     }
 }
