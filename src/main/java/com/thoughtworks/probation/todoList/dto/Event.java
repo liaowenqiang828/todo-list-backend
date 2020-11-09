@@ -1,11 +1,12 @@
 package com.thoughtworks.probation.todoList.dto;
 
+import com.thoughtworks.probation.todoList.constant.ErrorConstant;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
@@ -16,7 +17,7 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NonNull
+    @NotNull( message = ErrorConstant.EVENT_DETAIL_NULL_ERROR)
     private String detail;
     private boolean completed = false;
 }

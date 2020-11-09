@@ -37,6 +37,7 @@ public class TodoListService {
     }
 
     public void changeEventStatusById(int id, boolean completed, String detail) {
+        idCheck(id);
         Event event = this.todoListRepository.findById(id);
 
         if (detail != null) {

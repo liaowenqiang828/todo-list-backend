@@ -2,12 +2,15 @@ package com.thoughtworks.probation.todoList.controller;
 
 import com.thoughtworks.probation.todoList.dto.Event;
 import com.thoughtworks.probation.todoList.service.TodoListService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin
 @RestController
+@Validated
 public class TodoListController {
     private final TodoListService todoListService;
     public TodoListController(TodoListService todoListService) {
@@ -20,7 +23,7 @@ public class TodoListController {
     }
 
     @PostMapping("/event")
-    public int addEventToList(@RequestBody Event event) {
+    public int addEventToList(@RequestBody @Valid Event event) {
         return this.todoListService.addEventToList(event);
     }
 
