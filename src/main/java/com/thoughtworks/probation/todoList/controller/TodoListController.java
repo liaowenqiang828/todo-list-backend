@@ -28,4 +28,13 @@ public class TodoListController {
     public void deleteEventById(@PathVariable int id) {
         this.todoListService.deleteEventById(id);
     }
+
+    @PatchMapping("/event")
+    public void changeEventStatusById(
+            @RequestParam(value = "id") int id,
+            @RequestParam(value = "completed", required = false) boolean completed,
+            @RequestParam(value = "detail", required = false) String detail) {
+        this.todoListService.changeEventStatusById(id, completed, detail);
+    }
+
 }
