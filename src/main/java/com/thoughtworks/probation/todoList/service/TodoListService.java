@@ -23,7 +23,13 @@ public class TodoListService {
     }
 
     public int addEventToList(Event event) {
-        int preId = this.todoListRepository.findTopByOrderByIdDesc().getId();
+        int preId;
+        if (this.todoListRepository.findAll().size() == 0) {
+            preId = 1;
+        } else {
+            preId = this.todoListRepository.findTopByOrderByIdDesc().getId();
+        }
+
         int curId = preId + 1;
         event.setId(curId);
 
@@ -36,7 +42,7 @@ public class TodoListService {
         this.todoListRepository.deleteById(id);
     }
 
-    public void changeEventStatusById(int id, boolean completed, String detail) {
+    public void changeEventById(int id, boolean completed, String detail, String timeStamp) {
         idCheck(id);
         Event event = this.todoListRepository.findById(id);
 
@@ -44,6 +50,7 @@ public class TodoListService {
             event.setDetail(detail);
         }
         event.setCompleted(completed);
+        event.setTimeStamp(timeStamp);
         this.todoListRepository.save(event);
     }
 

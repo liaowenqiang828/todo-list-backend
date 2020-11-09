@@ -20,4 +20,5 @@ public class Event {
     @NotNull( message = ErrorConstant.EVENT_DETAIL_NULL_ERROR)
     private String detail;
     private boolean completed = false;
+    private String timeStamp;
 }
