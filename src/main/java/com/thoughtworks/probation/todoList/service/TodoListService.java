@@ -19,7 +19,7 @@ public class TodoListService {
     }
 
     public List<Event> getTodoList() {
-        return this.todoListRepository.findAll();
+        return this.todoListRepository.findAllByOrderByTimeStampDesc();
     }
 
     public int addEventToList(Event event) {
