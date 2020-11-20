@@ -55,8 +55,16 @@ public class TodoListService {
         if (timeStamp != null) {
             event.setTimeStamp(timeStamp);
         }
-        event.setCompleted(completed);
+        if (completed) {
+            event.setCompleted(completed);
+        }
         this.todoListRepository.save(event);
+    }
+
+    public void changeAllEventCheckedStatus(boolean isAllChecked) {
+        List<Event> lists = this.todoListRepository.findAll();
+        lists.forEach(event -> event.setChecked(!isAllChecked));
+        this.todoListRepository.saveAll(lists);
     }
 
     public void idCheck(int id) {

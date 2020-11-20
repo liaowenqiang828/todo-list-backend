@@ -42,4 +42,10 @@ public class TodoListController {
         this.todoListService.changeEventById(id, isChangeCheckedStatus,completed, timeStamp, detail);
     }
 
+    @PatchMapping("lists")
+    public void changeAllEventCheckedStatus(
+            @RequestParam(value = "isAllChecked") boolean isAllChecked) {
+        this.todoListService.changeAllEventCheckedStatus(isAllChecked);
+    }
+
 }
