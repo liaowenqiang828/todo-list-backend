@@ -42,15 +42,20 @@ public class TodoListService {
         this.todoListRepository.deleteById(id);
     }
 
-    public void changeEventById(int id, boolean completed, String detail, String timeStamp) {
+    public void changeEventById(int id, boolean isChangeCheckedStatus, boolean completed, String timeStamp, String detail) {
         idCheck(id);
         Event event = this.todoListRepository.findById(id);
 
         if (detail != null) {
             event.setDetail(detail);
         }
+        if (isChangeCheckedStatus) {
+            event.setChecked(!event.isChecked());
+        }
+        if (timeStamp != null) {
+            event.setTimeStamp(timeStamp);
+        }
         event.setCompleted(completed);
-        event.setTimeStamp(timeStamp);
         this.todoListRepository.save(event);
     }
 

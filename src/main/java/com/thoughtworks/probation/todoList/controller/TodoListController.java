@@ -35,10 +35,11 @@ public class TodoListController {
     @PatchMapping("/event")
     public void changeEventById(
             @RequestParam(value = "id") int id,
-            @RequestParam(value = "timeStamp") String timeStamp,
+            @RequestParam(value = "timeStamp", required = false) String timeStamp,
             @RequestParam(value = "completed", required = false) boolean completed,
-            @RequestParam(value = "detail", required = false) String detail) {
-        this.todoListService.changeEventById(id, completed, detail, timeStamp);
+            @RequestParam(value = "detail", required = false) String detail,
+            @RequestParam(value = "isChangeCheckedStatus", required = false) boolean isChangeCheckedStatus) {
+        this.todoListService.changeEventById(id, isChangeCheckedStatus,completed, timeStamp, detail);
     }
 
 }

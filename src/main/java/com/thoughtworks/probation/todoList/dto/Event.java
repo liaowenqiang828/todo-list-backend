@@ -21,4 +21,5 @@ public class Event {
     private String detail;
     private boolean completed = false;
     private String timeStamp;
+    private boolean checked = false;
 }
