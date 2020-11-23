@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -44,12 +45,25 @@ public class TodoListService {
         this.todoListRepository.deleteById(id);
     }
 
-    public void deleteEventByIdS(String checkedIdList) {
+    public void deleteOrCompleteEventByIdS(String operation, String checkedIdList) {
         List<Integer> idsList = Arrays.stream(checkedIdList.split(","))
                 .map(Integer::valueOf).collect(Collectors.toList());
-        idsList.forEach(id -> {
-            this.todoListRepository.deleteById(id);
-        });
+
+        if (operation.equals("delete")) {
+            idsList.forEach(id -> {
+                this.todoListRepository.deleteById(id);
+            });
+        }
+        if (operation.equals("complete")) {
+            idsList.forEach(id -> {
+                Optional<Event> event = this.todoListRepository.findById(id);
+                event.ifPresent(event1 -> {
+                    event1.setCompleted(true);
+                    event1.setChecked(false);
+                    this.todoListRepository.save(event1);
+                });
+            });
+        }
     }
 
     public void changeEventById(int id, boolean isChangeCheckedStatus, boolean completed, String timeStamp, String detail) {

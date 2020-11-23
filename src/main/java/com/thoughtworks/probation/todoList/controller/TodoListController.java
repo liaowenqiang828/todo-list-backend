@@ -50,7 +50,12 @@ public class TodoListController {
 
     @DeleteMapping("/ids")
     public void deleteEventsByIds(@RequestParam(value = "checkedIdList") String checkedIdList) {
-        this.todoListService.deleteEventByIdS(checkedIdList);
+        this.todoListService.deleteOrCompleteEventByIdS("delete", checkedIdList);
+    }
+
+    @PatchMapping("/ids")
+    public void completeAllEventsByIds(@RequestParam(value = "checkedIdList") String checkedIdList) {
+        this.todoListService.deleteOrCompleteEventByIdS("complete", checkedIdList);
     }
 
 }
