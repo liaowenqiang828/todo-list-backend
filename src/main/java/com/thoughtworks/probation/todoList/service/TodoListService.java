@@ -6,8 +6,10 @@ import com.thoughtworks.probation.todoList.repository.TodoListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class TodoListService {
@@ -40,6 +42,14 @@ public class TodoListService {
     public void deleteEventById(int id) {
         idCheck(id);
         this.todoListRepository.deleteById(id);
+    }
+
+    public void deleteEventByIdS(String checkedIdList) {
+        List<Integer> idsList = Arrays.stream(checkedIdList.split(","))
+                .map(Integer::valueOf).collect(Collectors.toList());
+        idsList.forEach(id -> {
+            this.todoListRepository.deleteById(id);
+        });
     }
 
     public void changeEventById(int id, boolean isChangeCheckedStatus, boolean completed, String timeStamp, String detail) {

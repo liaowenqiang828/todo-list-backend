@@ -48,4 +48,9 @@ public class TodoListController {
         this.todoListService.changeAllEventCheckedStatus(isAllChecked);
     }
 
+    @DeleteMapping("/ids")
+    public void deleteEventsByIds(@RequestParam(value = "checkedIdList") String checkedIdList) {
+        this.todoListService.deleteEventByIdS(checkedIdList);
+    }
+
 }
