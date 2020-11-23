@@ -45,7 +45,7 @@ public class TodoListService {
         this.todoListRepository.deleteById(id);
     }
 
-    public void deleteOrCompleteEventByIdS(String operation, String checkedIdList) {
+    public void deleteOrCompleteEventByIdS(String operation, String checkedIdList, String timeStamp) {
         List<Integer> idsList = Arrays.stream(checkedIdList.split(","))
                 .map(Integer::valueOf).collect(Collectors.toList());
 
@@ -60,6 +60,7 @@ public class TodoListService {
                 event.ifPresent(event1 -> {
                     event1.setCompleted(true);
                     event1.setChecked(false);
+                    event1.setTimeStamp(timeStamp);
                     this.todoListRepository.save(event1);
                 });
             });
